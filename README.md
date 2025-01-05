@@ -172,11 +172,14 @@ We welcome contributions! Please feel free to submit a Pull Request.
 If you use this code in your research, please cite our work:
 
 ```bibtex
-@article{your-paper,
-    title={},
-    author={},
-    journal={},
-    year={}
+@misc{chahe2024query3dllmpoweredopenvocabularyscene,
+      title={Query3D: LLM-Powered Open-Vocabulary Scene Segmentation with Language Embedded 3D Gaussian}, 
+      author={Amirhosein Chahe and Lifeng Zhou},
+      year={2024},
+      eprint={2408.03516},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2408.03516}, 
 }
 ```
 
@@ -186,8 +189,6 @@ This work builds upon the [LEGaussian](https://github.com/buaavrcg/LEGaussians) 
 
 ## License
 
-[Your chosen license] - See LICENSE file for details
+[LICENSE] - See LICENSE file for details
 
-## Contact
 
-[Your name] - [Your email/contact information]
