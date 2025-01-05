@@ -1,3 +1,40 @@
+<div align="center">
+
+<h1><b>Query3D</b>: LLM-Powered Open-Vocabulary Scene Segmentation with Language Embedded 3D Gaussians</h1>
+
+<div>
+    <a href='https://github.com/your-username' target='_blank'>Amirhosein Chahe<sup>1</sup></a>&emsp;
+    <a href='https://github.com/your-username' target='_blank'>Lifeng Zhou<sup>1</sup></a>&emsp;
+</div>
+<div>
+    <sup>1</sup>Drexel University, Philadelphia PA 19104, USA&emsp;
+</div>
+<div>
+    <a href='https://arxiv.org/abs/your-paper-id'>Paper (Coming Soon)</a>
+</div>
+
+<div>
+<a target="_blank" href="https://arxiv.org/abs/your-paper-id">
+  <img src="https://img.shields.io/badge/arXiv-your--paper--id-b31b1b.svg" alt="arXiv Paper"/>
+</a>
+<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fyour-username%2FQuery3D&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
+</div>
+
+<h4>TL;DR</h4>
+<h5>We present Query3D, a novel method for open-vocabulary 3D scene querying in autonomous driving by combining Language Embedded 3D Gaussians with Large Language Models (LLMs).</h5>
+
+### [Paper](#) | [Project Page](#) | [Code](#)
+
+<br>
+
+<tr>
+    <img src="./assets/teaser.png" width="100%"/>
+</tr>
+
+</div>
+
+***Abstract**: This paper introduces a novel method for open-vocabulary 3D scene querying in autonomous driving by combining Language Embedded 3D Gaussians with Large Language Models (LLMs). We propose utilizing LLMs to generate both contextually canonical phrases and helping positive words for enhanced segmentation and scene interpretation. Our method leverages GPT-3.5 Turbo as an expert model to create a high-quality text dataset, which we then use to fine-tune smaller, more efficient LLMs for on-device deployment. Our comprehensive evaluation on the WayveScenes101 dataset demonstrates that LLM-guided segmentation significantly outperforms traditional approaches based on predefined canonical phrases. Notably, our fine-tuned smaller models achieve performance comparable to larger expert models while maintaining faster inference times. Through ablation studies, we discover that the effectiveness of helping positive words correlates with model scale, with larger models better equipped to leverage additional semantic information. This work represents a significant advancement towards more efficient, context-aware autonomous driving systems, effectively bridging 3D scene representation with high-level semantic querying while maintaining practical deployment considerations.*
+
 # Query-3DGS-LLM
 
 This repository contains code for LLM-powered semantic querying of 3D Gaussian Splatting scenes. Built upon the [LEGaussian](https://github.com/buaavrcg/LEGaussians) framework, this project extends the capabilities by integrating Large Language Models (LLMs) like Qwen and Llama for semantic scene understanding and manipulation.
