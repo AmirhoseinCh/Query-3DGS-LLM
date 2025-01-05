@@ -122,7 +122,7 @@ We support multiple LLM models:
 
 ### Model Finetuning
 
-The project uses [unsloth](https://github.com/unslothai/unsloth) for efficient LLM finetuning. The finetuning process is accelerated using unsloth's optimization techniques:
+The project uses [unsloth](https://github.com/unslothai/unsloth) for efficient LLM finetuning:
 
 1. Start the unsloth Docker container:
 ```bash
@@ -130,19 +130,14 @@ cd unsloth
 ./run_unsloth.sh
 ```
 
-2. Run the finetuning process:
-- For Qwen models, use the notebooks in the unsloth directory:
-  - `finetune.ipynb`: General finetuning notebook
-  - `Qwen_2_5_+_Unsloth_2x_faster_finetuning.ipynb`: Optimized Qwen 2.5 finetuning
+2. Run the finetuning process using the provided Jupyter notebook:
+```
+finetune.ipynb
+```
 
-The finetuned models are saved in the respective output directories:
-- `outputs-0.5B/`: Qwen 2.5 0.5B model outputs
-- `outputs-1.5B/`: Qwen 2.5 1.5B model outputs
-- `outputs-3B/`: Qwen 2.5 3B model outputs
-- `outputs-7B/`: Qwen 2.5 7B model outputs
-- `outputs-Llama-1B-Instruct/`: Llama 1B model outputs
-- `outputs-Llama-3B-Instruct/`: Llama 3B model outputs
-- `outputs-Llama-8B-Instruct/`: Llama 8B model outputs
+The notebook contains all necessary steps and instructions for finetuning both Qwen and Llama models.
+
+Finetuned models will be saved in the respective output directories based on the model size and type (e.g., `outputs-3B/` for Qwen 2.5 3B model).
 
 ## Results
 
