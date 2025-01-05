@@ -25,8 +25,6 @@
 <h4>TL;DR</h4>
 <h5>We present Query3D, a novel method for open-vocabulary 3D scene querying in autonomous driving by combining Language Embedded 3D Gaussians with Large Language Models (LLMs).</h5>
 
-<br>
-
 <tr>
     <img src="./Query3DGSGPT.png" width="100%"/>
 </tr>
