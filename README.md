@@ -10,19 +10,20 @@
     <sup>1</sup>Drexel University, Philadelphia PA 19104, USA&emsp;
 </div>
 <div>
-    <a href='https://arxiv.org/abs/2408.03516'>Paper</a>
+    <a href='https://arxiv.org/abs/2408.03516'>Paper)</a> | <b>Accepted at the LLVM-AD Workshop at WACV 2025</b>
 </div>
 
 <div>
 <a target="_blank" href="https://arxiv.org/abs/2408.03516">
   <img src="https://img.shields.io/badge/arXiv-2408.03516-b31b1b.svg" alt="arXiv Paper"/>
 </a>
+<a target="_blank" href="https://wacv2025.thecvf.com/">
+  <img src="https://img.shields.io/badge/WACV%202025-LLVM--AD%20Workshop-blue.svg" alt="WACV 2025 LLVM-AD Workshop"/>
+</a>
 </div>
 
 <h4>TL;DR</h4>
 <h5>We present Query3D, a novel method for open-vocabulary 3D scene querying in autonomous driving by combining Language Embedded 3D Gaussians with Large Language Models (LLMs).</h5>
-
-### [Paper](https://arxiv.org/abs/2408.03516)
 
 <br>
 
