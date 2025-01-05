@@ -35,9 +35,9 @@
 
 
 ## Overview
-This repository contains code for LLM-powered semantic querying of 3D Gaussian Splatting scenes. Built upon the [LEGaussian](https://github.com/buaavrcg/LEGaussians) framework, this project extends the capabilities by integrating Large Language Models (LLMs) like Qwen and Llama for semantic scene understanding and manipulation.
+This repository contains code for LLM-powered semantic querying of 3D Gaussian Splatting scenes. Built upon the [LEGaussian](https://github.com/buaavrcg/LEGaussians) framework, this project extends the capabilities by integrating Large Language Models (LLMs) like Qwen and Llama for semantic scene understanding.
 
-Our project enables semantic querying and manipulation of 3D Gaussian Splatting scenes using natural language through LLM integration. Users can query scene elements, modify representations, and generate targeted visualizations through natural language interactions.
+Our project enables semantic querying of 3D Gaussian Splatting scenes using natural language through LLM integration. Users can query scene elements, and generate targeted visualizations through natural language interactions.
 
 ## Datasets
 
