@@ -3,8 +3,8 @@
 <h1><b>Query3D</b>: LLM-Powered Open-Vocabulary Scene Segmentation with Language Embedded 3D Gaussians</h1>
 
 <div>
-    <a href='https://github.com/your-username' target='_blank'>Amirhosein Chahe<sup>1</sup></a>&emsp;
-    <a href='https://github.com/your-username' target='_blank'>Lifeng Zhou<sup>1</sup></a>&emsp;
+    <a href='https://scholar.google.com/citations?user=MeK_1LUAAAAJ&hl=en' target='_blank'>Amirhosein Chahe<sup>1</sup></a>&emsp;
+    <a href='https://scholar.google.com/citations?user=0sNe1G4AAAAJ&hl=en' target='_blank'>Lifeng Zhou<sup>1</sup></a>&emsp;
 </div>
 <div>
     <sup>1</sup>Drexel University, Philadelphia PA 19104, USA&emsp;
@@ -17,7 +17,6 @@
 <a target="_blank" href="https://arxiv.org/abs/2408.03516">
   <img src="https://img.shields.io/badge/arXiv-2408.03516-b31b1b.svg" alt="arXiv Paper"/>
 </a>
-<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fyour-username%2FQuery3D&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
 </div>
 
 <h4>TL;DR</h4>
