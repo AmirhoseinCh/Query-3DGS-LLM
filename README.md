@@ -28,7 +28,7 @@
 <br>
 
 <tr>
-    <img src="./LE3DGSGPT.png" width="100%"/>
+    <img src="./Query3DGSGPT.png" width="100%"/>
 </tr>
 
 </div>
