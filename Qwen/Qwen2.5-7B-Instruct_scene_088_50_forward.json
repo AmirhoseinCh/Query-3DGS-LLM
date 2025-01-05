@@ -1,0 +1,115 @@
+{
+    "text": [
+        "sidewalk",
+        "crosswalk",
+        "cars",
+        "building",
+        "road",
+        "tree",
+        "stop sign"
+    ],
+    "helping_positives": [
+        [
+            "curb",
+            "pavement",
+            "pedestrian"
+        ],
+        [
+            "pedestrian",
+            "stripes",
+            "pavement"
+        ],
+        [
+            "vehicles",
+            "automobiles",
+            "sedans"
+        ],
+        [
+            "residential",
+            "well-maintained",
+            "hedges"
+        ],
+        [
+            "pavement",
+            "markings",
+            "curb"
+        ],
+        [
+            "autumn",
+            "yellow",
+            "red"
+        ],
+        [
+            "octagonal",
+            "red",
+            "black letters"
+        ]
+    ],
+    "negatives": [
+        [
+            "road",
+            "car",
+            "bike",
+            "bench",
+            "bush",
+            "mailbox"
+        ],
+        [
+            "car",
+            "bicycle",
+            "stop sign",
+            "tree",
+            "house",
+            "utility pole"
+        ],
+        [
+            "bicycles",
+            "motorcycles",
+            "pedestrians",
+            "trucks",
+            "buses",
+            "cyclists"
+        ],
+        [
+            "tree",
+            "car",
+            "pedestrian",
+            "sign",
+            "utility pole",
+            "sky"
+        ],
+        [
+            "sidewalk",
+            "grass",
+            "building",
+            "car",
+            "pedestrian",
+            "cyclist"
+        ],
+        [
+            "car",
+            "house",
+            "stop sign",
+            "utility pole",
+            "hedge",
+            "pedestrian"
+        ],
+        [
+            "traffic light",
+            "yield sign",
+            "speed bump",
+            "mailbox",
+            "pedestrian",
+            "bicycle"
+        ]
+    ],
+    "segformer_class_id": [
+        1,
+        -1,
+        13,
+        2,
+        0,
+        8,
+        7
+    ]
+}

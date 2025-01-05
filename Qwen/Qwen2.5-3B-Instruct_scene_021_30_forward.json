@@ -1,0 +1,100 @@
+{
+    "text": [
+        "traffic light",
+        "cars",
+        "sidewalk",
+        "buildings",
+        "tree",
+        "road"
+    ],
+    "helping_positives": [
+        [
+            "signal",
+            "stoplight",
+            "junction"
+        ],
+        [
+            "vehicles",
+            "motor vehicles",
+            "road vehicles"
+        ],
+        [
+            "trees",
+            "leaves",
+            "pedestrians"
+        ],
+        [
+            "modern",
+            "glass-facade",
+            "urban"
+        ],
+        [
+            "foliage",
+            "leaves",
+            "branches"
+        ],
+        [
+            "lane",
+            "surface",
+            "highway"
+        ]
+    ],
+    "negatives": [
+        [
+            "pedestrian crossing sign",
+            "bike lane sign",
+            "bus stop sign",
+            "fire hydrant",
+            "trash can",
+            "parked car"
+        ],
+        [
+            "bicycles",
+            "motorcycles",
+            "pedestrians",
+            "trucks",
+            "trains",
+            "boats"
+        ],
+        [
+            "road",
+            "building",
+            "vehicle",
+            "sky",
+            "water",
+            "mountain"
+        ],
+        [
+            "trees",
+            "mountains",
+            "forests",
+            "countryside",
+            "wilderness",
+            "open fields"
+        ],
+        [
+            "vehicle",
+            "building",
+            "pedestrian",
+            "animal",
+            "cloud",
+            "sky"
+        ],
+        [
+            "body of water",
+            "grassy area",
+            "pedestrian crossing",
+            "railway track",
+            "dirt path",
+            "rocky terrain"
+        ]
+    ],
+    "segformer_class_id": [
+        6,
+        13,
+        1,
+        2,
+        8,
+        0
+    ]
+}

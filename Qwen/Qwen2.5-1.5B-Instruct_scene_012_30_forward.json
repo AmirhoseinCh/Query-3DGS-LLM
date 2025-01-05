@@ -1,0 +1,110 @@
+{
+    "text": [
+        "Pedestrian",
+        "Vehicle",
+        "traffic signs",
+        "Sidewalk",
+        "Trees",
+        "Buildings",
+        "Road"
+    ],
+    "helping_positives": [
+        [
+            "person",
+            "human being",
+            "walker"
+        ],
+        [
+            "dump truck",
+            "crane",
+            "tow tractor"
+        ],
+        [
+            "Road Sign",
+            "Warning Sign",
+            "Regulatory Sign"
+        ],
+        [
+            "pavement",
+            "pedestrian path",
+            "walkway"
+        ],
+        [
+            "Branches",
+            "Leaves",
+            "Trunk"
+        ],
+        [
+            "structure",
+            "edifice",
+            "structure"
+        ],
+        [
+            "pavement",
+            "asphalt",
+            "surface"
+        ]
+    ],
+    "negatives": [
+        [
+            "car",
+            "truck",
+            "bicycle",
+            "motorcycle",
+            "animal",
+            "vehicle"
+        ],
+        [
+            "bicycle",
+            "pedestrian",
+            "dog",
+            "bird",
+            "flower",
+            "car"
+        ],
+        [
+            "Flags",
+            "Signal Lights",
+            "Street Furniture",
+            "Bollards",
+            "Barriers"
+        ],
+        [
+            "road",
+            "driveway",
+            "parking lot",
+            "sidewalk divider",
+            "curbside area"
+        ],
+        [
+            "Tree",
+            "Bush",
+            "Flower",
+            "Grass",
+            "Plant"
+        ],
+        [
+            "tree",
+            "vehicle",
+            "person",
+            "sign",
+            "signboard"
+        ],
+        [
+            "sidewalk",
+            "parking lot",
+            "driveway",
+            "pathway",
+            "trail"
+        ]
+    ],
+    "segformer_class_id": [
+        11,
+        14,
+        7,
+        -1,
+        8,
+        2,
+        0
+    ]
+}

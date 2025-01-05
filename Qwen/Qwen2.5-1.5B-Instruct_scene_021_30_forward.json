@@ -1,0 +1,89 @@
+{
+    "text": [
+        "traffic light",
+        "cars",
+        "sidewalk",
+        "buildings",
+        "tree",
+        "road"
+    ],
+    "helping_positives": [
+        [
+            "stop sign",
+            "red light",
+            "green arrow"
+        ],
+        [
+            "vehicle",
+            "automobile",
+            "motorized vehicle"
+        ],
+        [
+            "pedestrian",
+            "leaf",
+            "shade"
+        ],
+        [
+            "office",
+            "skyscraper",
+            "multi-story"
+        ],
+        [
+            "green foliage",
+            "branches",
+            "leaves"
+        ],
+        [
+            "Car",
+            "Truck",
+            "Motorcycle"
+        ]
+    ],
+    "negatives": [
+        [
+            "car",
+            "bicycle",
+            "pedestrian",
+            "tree",
+            "building"
+        ],
+        [
+            "bicycles",
+            "pedestrians",
+            "trees",
+            "benches",
+            "trash cans"
+        ],
+        [
+            "road",
+            "driveway",
+            "path"
+        ],
+        [
+            "trees",
+            "pedestrians",
+            "cars",
+            "grass",
+            "flowers"
+        ],
+        [
+            "car",
+            "person",
+            "traffic sign",
+            "stoplight"
+        ],
+        [
+            "Bicycle",
+            "Person",
+            "Tree"
+        ]
+    ],
+    "segformer_class_id": [
+        6,
+        13,
+        1,
+        2,
+        8,
+        0
+    ]
+}

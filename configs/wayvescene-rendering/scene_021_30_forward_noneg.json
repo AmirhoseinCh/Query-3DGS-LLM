@@ -1,0 +1,35 @@
+{
+    "text": [
+        "traffic light",
+        "cars",
+        "sidewalk",
+        "buildings",
+        "tree",
+        "road"
+    ],
+    "helping_positives": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+    ],
+    "negatives": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+    ],
+    "segformer_class_id": [
+        6,
+        13,
+        1,
+        2,
+        8,
+        0
+    ]
+}
+

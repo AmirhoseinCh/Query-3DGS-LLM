@@ -21,27 +21,57 @@ try:
     TENSORBOARD_FOUND = True
 except ImportError:
     TENSORBOARD_FOUND = False
+    print("Tensorboard Not Found!")
 
 FIRST_REPORT = True
 
+# def compute_semantic_loss(language_feature_indices, gt_language_feature_indices, uncertainty, ce):
+#     # Lem Loss
+#     # Resize clip feature indices to match image size
+#     a, b = language_feature_indices.shape[1], language_feature_indices.shape[2]
+
+#     upsampled_gt_language_feature_indices = \
+#                 F.interpolate(gt_language_feature_indices.unsqueeze(0).float(), size=(a, b), mode='nearest').squeeze(0).long()
+
+#     upsampled_gt_language_feature_indices = upsampled_gt_language_feature_indices.permute(1,2,0).view(-1)
+    
+#     language_feature_indices = language_feature_indices.permute(1,2,0)
+#     language_feature_indices = language_feature_indices.reshape(-1, language_feature_indices.shape[-1])
+#     semantic_loss = ce(language_feature_indices, upsampled_gt_language_feature_indices)
+    
+#     uncertainty = 1.0 - uncertainty.permute(1,2,0).reshape(-1)
+#     semantic_loss = (semantic_loss * uncertainty).mean()
+#     # print('semantic loss: ', semantic_loss.item())
+#     # print('uncertainty: ',uncertainty.mean().item())
+#     return semantic_loss
+
 def compute_semantic_loss(language_feature_indices, gt_language_feature_indices, uncertainty, ce):
-    # Lem Loss
     # Resize clip feature indices to match image size
     a, b = language_feature_indices.shape[1], language_feature_indices.shape[2]
 
     upsampled_gt_language_feature_indices = \
-                F.interpolate(gt_language_feature_indices.unsqueeze(0).float(), size=(a, b), mode='nearest').squeeze(0).long()
+        F.interpolate(gt_language_feature_indices.unsqueeze(0).float(), size=(a, b), mode='nearest').squeeze(0).long()
 
     upsampled_gt_language_feature_indices = upsampled_gt_language_feature_indices.permute(1,2,0).view(-1)
     
     language_feature_indices = language_feature_indices.permute(1,2,0)
     language_feature_indices = language_feature_indices.reshape(-1, language_feature_indices.shape[-1])
+
     semantic_loss = ce(language_feature_indices, upsampled_gt_language_feature_indices)
     
     uncertainty = 1.0 - uncertainty.permute(1,2,0).reshape(-1)
+    # Clamp uncertainty to avoid invalid values
+    uncertainty = torch.clamp(uncertainty, min=1e-6, max=1.0)
+
     semantic_loss = (semantic_loss * uncertainty).mean()
     
+    # Handle NaN values in semantic_loss
+    if torch.isnan(semantic_loss):
+        print("Warning: NaN detected in semantic_loss, replacing with zero.")
+        semantic_loss = torch.zeros_like(semantic_loss)
+
     return semantic_loss
+
 
 def compute_mlp_smooth_loss(xyzs, embedding, decoder, gs_semantic_features, uncertainty, smooth_loss_uncertainty_min):
     xyzs_pe = embedding(xyzs)
@@ -82,6 +112,9 @@ def training(dataset, opt, pipe,
         gaussians.restore(model_params, opt)
         index_decoder_ckpt = os.path.join(os.path.dirname(checkpoint), "index_decoder_" + os.path.basename(checkpoint))
         index_decoder.load_state_dict(torch.load(index_decoder_ckpt))
+        print('3DGS model loaded from: ', checkpoint)
+        print('Index Decoder loaded from: ', index_decoder_ckpt)
+        print('Loaded Iter: ', first_iter)
 
     bg_color = [1, 1, 1] if dataset.white_background else [0, 0, 0]
     background = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
@@ -150,7 +183,9 @@ def training(dataset, opt, pipe,
                     + dataset.smooth_loss_weight * smooth_loss
         
         total_loss.backward()
-
+        # torch.nn.utils.clip_grad_norm_(index_decoder.parameters(), max_norm=1)
+        # torch.nn.utils.clip_grad_norm_(xyz_decoder.parameters(), max_norm=1)
+        # torch.nn.utils.clip_grad_norm_(gaussians.parameters(), max_norm=1)
         iter_end.record()
 
         with torch.no_grad():
@@ -228,8 +263,9 @@ def prepare_output_and_logger(dataset, opt, pipe):
     tb_writer = None
     if TENSORBOARD_FOUND:
         tb_writer = SummaryWriter(dataset.model_path)
+        print(f"--- Write log in: {dataset.model_path}.")
     else:
-        print("Tensorboard not available: not logging progress")
+        print("-----------Tensorboard not available: not logging progress-----------")
     return tb_writer
 
 def training_report(tb_writer, iteration, is_novel_view,
@@ -345,11 +381,11 @@ if __name__ == "__main__":
     parser.add('--config', required=True, is_config_file=True, help='config file path')
     parser.add('--debug_from', type=int, default=-1)
     parser.add('--detect_anomaly', action='store_true', default=False)
-    parser.add("--test_iterations", nargs="+", type=int, default=[0]+[i for i in range(0, 30_001, 10_000)])
+    parser.add("--test_iterations", nargs="+", type=int, default=[0]+[i for i in range(0, 120_001, 5_000)])
     parser.add("--test_set", nargs="+", type=str, default=[])
-    parser.add("--save_iterations", nargs="+", type=int, default=[i for i in range(0, 30_001, 10_000)])
+    parser.add("--save_iterations", nargs="+", type=int, default=[i for i in range(0, 120_001, 10_000)])
     parser.add("--quiet", action="store_true")
-    parser.add("--checkpoint_iterations", nargs="+", type=int, default=[i for i in range(0, 30_001, 10_000)])
+    parser.add("--checkpoint_iterations", nargs="+", type=int, default=[i for i in range(0, 120_001, 5_000)])
     parser.add("--start_checkpoint", type=str, default = None)
     args = parser.parse_args(sys.argv[1:])
     args.save_iterations.append(args.iterations)

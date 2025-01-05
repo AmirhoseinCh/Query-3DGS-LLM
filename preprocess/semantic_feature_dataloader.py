@@ -134,7 +134,7 @@ class PyramidSematicFeatureDataset(Dataset):
                 process = self.process,
             )
         return mixture_data().to(self.device)
-    
+    """
     def _concat_features(self):
         clips = self._load_mixture().permute(0, 3, 1, 2) # [194, 512, 106, 160]
 
@@ -163,7 +163,55 @@ class PyramidSematicFeatureDataset(Dataset):
         self.data = self.data.contiguous().permute(0, 2, 3, 1)
         mask = torch.isnan(self.data) | torch.isinf(self.data)
         self.data[mask] = 0
+    """
+    def _concat_features(self):
+        # Load CLIP features on CPU
+        clips = self._load_mixture().float().permute(0, 3, 1, 2).cpu()  # [194, 512, 106, 160]
 
+        # Get DINO features on CPU
+        dinos = get_dinos(self.path, self.dino_params, half=True).float().permute(0, 3, 1, 2).cpu()
+
+        h, w = 60, 90
+        batch_size = 50  # Adjust this based on your GPU memory
+        
+        result = []
+        
+        for i in range(0, clips.shape[0], batch_size):
+            # Process CLIP features in batches
+            clip_batch = clips[i:i+batch_size]
+            sampled_clips = F.interpolate(clip_batch, size=(h, w), mode='bilinear', align_corners=False)
+            
+            # Process DINO features in batches
+            dino_batch = dinos[i:i+batch_size]
+            if dino_batch.shape[0] < 300:
+                sampled_dinos = F.interpolate(dino_batch, size=(h, w), mode='bilinear', align_corners=False)
+            else:
+                sampled_dinos = torch.cat((
+                    F.interpolate(dino_batch[:200], size=(h, w), mode='bilinear', align_corners=False),
+                    F.interpolate(dino_batch[200:], size=(h, w), mode='bilinear', align_corners=False)
+                ), dim=0)
+            
+            # Concatenate features
+            batch_result = torch.cat((sampled_clips, sampled_dinos), dim=1)
+            
+            # Move to GPU for further processing
+            batch_result = batch_result.to("cuda")
+            batch_result = batch_result.contiguous().permute(0, 2, 3, 1)
+            
+            # Handle NaN and Inf values
+            mask = torch.isnan(batch_result) | torch.isinf(batch_result)
+            batch_result[mask] = 0
+            
+            result.append(batch_result.cpu())  # Move back to CPU to save GPU memory
+            
+            # Clear GPU cache
+            torch.cuda.empty_cache()
+        
+        # Concatenate all batches
+        self.data = torch.cat(result, dim=0).to("cuda")
+
+        del clips, dinos, result
+        torch.cuda.empty_cache()
     def __len__(self):
         return self.data.shape[0]
 

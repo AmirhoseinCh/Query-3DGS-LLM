@@ -1,0 +1,28 @@
+{
+    "text": [
+        "Roadwork"
+    ],
+    "helping_positives": [
+        [
+            "Construction",
+            "Traffic",
+            "Lane Markings"
+        ]
+    ],
+    "negatives": [
+        [
+            "Trees",
+            "Buildings",
+            "Signs"
+        ]
+    ],
+    "segformer_class_id": [
+        11,
+        14,
+        7,
+        -1,
+        8,
+        2,
+        0
+    ]
+}

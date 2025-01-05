@@ -1,0 +1,62 @@
+{
+    "traffic signs": {
+        "helping_positives": [
+            "Warning"
+        ],
+        "negatives": [
+            "cars",
+            "trees"
+        ]
+    },
+    "cars": {
+        "helping_positives": [
+            "traffic",
+            "vehicles"
+        ],
+        "negatives": [
+            "road",
+            "building",
+            "tree",
+            "traffic lights"
+        ]
+    },
+    "buildings": {
+        "helping_positives": [
+            "town house"
+        ],
+        "negatives": [
+            "trees",
+            "cars",
+            "clouds"
+        ]
+    },
+    "tree": {
+        "helping_positives": [
+            "Leaves"
+        ],
+        "negatives": [
+            "Poles",
+            "Traffic lights",
+            "Buildings",
+            "Cars",
+            "Pedestrians",
+            "grass"
+        ]
+    },
+    "road": {
+        "helping_positives": [
+            "asphalt",
+            "ground",
+            "driveway",
+            "crosswalk"
+        ],
+        "negatives": [
+            "trees",
+            "buildings",
+            "cars",
+            "sky",
+            "bushes",
+            "fence"
+        ]
+    }
+}

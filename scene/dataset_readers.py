@@ -12,7 +12,7 @@ from pathlib import Path
 from plyfile import PlyData, PlyElement
 from utils.sh_utils import SH2RGB
 from scene.gaussian_model import BasicPointCloud
-
+import math
 
 
 CODEBOOK_SIZE = 128
@@ -86,18 +86,36 @@ def readColmapCameras(cam_extrinsics, cam_intrinsics, images_folder):
             focal_length_y = intr.params[1]
             FovY = focal2fov(focal_length_y, height)
             FovX = focal2fov(focal_length_x, width)
+        elif intr.model == "OPENCV_FISHEYE":
+            focal_length_x = intr.params[0]
+            focal_length_y = intr.params[1]
+            # For fisheye, we'll use the diagonal FOV
+            diagonal = np.sqrt(width**2 + height**2)
+            focal_length = (focal_length_x + focal_length_y) / 2  # average focal length
+            FovDiagonal = 4 * np.arctan(diagonal / (4 * focal_length))
+            aspect_ratio = width / height
+            FovY = 2 * np.arctan(np.tan(FovDiagonal / 2) / np.sqrt(1 + aspect_ratio**2))
+            FovX = 2 * np.arctan(aspect_ratio * np.tan(FovY / 2))
         else:
-            assert False, "Colmap camera model not handled: only undistorted datasets (PINHOLE or SIMPLE_PINHOLE cameras) supported!"
+            assert False, f"Colmap camera model '{intr.model}' not handled: only undistorted datasets (PINHOLE, SIMPLE_PINHOLE) and OPENCV_FISHEYE cameras supported!"
 
-        image_path = os.path.join(images_folder, os.path.basename(extr.name))
-        image_name = os.path.basename(image_path).split(".")[0]
-        image = Image.open(image_path)
+        # if extr.name.startswith("right-backward") or extr.name.startswith("left-backward"):
+        #     continue
+
+        image_path = os.path.join(images_folder, extr.name)
+        image_name = extr.name
+        if os.path.exists(image_path):
+            image = Image.open(image_path)
+        else:
+            continue
 
         cam_info = CameraInfo(uid=uid, R=R, T=T, FovY=FovY, FovX=FovX, image=image,
                               image_path=image_path, image_name=image_name, width=width, height=height,
                               language_feature_indices=None)
         cam_infos.append(cam_info)
+    
     sys.stdout.write('\n')
+    print('Cam info len:', len(cam_infos))
     return cam_infos
 
 def fetchPly(path):
@@ -140,11 +158,15 @@ def readColmapSceneInfo(path, images, eval, test_set, indices_path, llffhold=8):
     reading_dir = "images" if images == None else images
     cam_infos_unsorted = readColmapCameras(cam_extrinsics=cam_extrinsics, cam_intrinsics=cam_intrinsics, images_folder=os.path.join(path, reading_dir))
     cam_infos = sorted(cam_infos_unsorted.copy(), key = lambda x : x.image_name)
+
+    print('cam info:', len(cam_infos))
     
     # Assign clip feature indices to cam_infos
     try:
-        clip_feature_indices_file = os.path.join(path, reading_dir, indices_path)
-        indices = torch.load(clip_feature_indices_file).detach().cpu().numpy()
+
+        # clip_feature_indices_file = os.path.join(path, indices_path)
+        # print('clip path:', indices_path)
+        indices = torch.load(indices_path).detach().cpu().numpy()
         # namedtuple is immutable, so we need to create a new one
         for idx, cam_info in enumerate(cam_infos):
             cam_info = cam_info._replace(language_feature_indices=indices[idx])
@@ -155,15 +177,18 @@ def readColmapSceneInfo(path, images, eval, test_set, indices_path, llffhold=8):
 
     if eval:
         if test_set is None:
+            print("Using LLFF holdout for evaluation.")
             train_cam_infos = [c for idx, c in enumerate(cam_infos) if idx % llffhold != 0]
             test_cam_infos = [c for idx, c in enumerate(cam_infos) if idx % llffhold == 0]
         else:
+            print("Using custom test set for evaluation.")
             train_cam_infos = [c for c in cam_infos if c.image_name not in test_set]
             test_cam_infos = [c for c in cam_infos if c.image_name in test_set]
+            
     else:
         train_cam_infos = cam_infos
         test_cam_infos = []
-
+    print('---------------Len test Cam:', eval, len(train_cam_infos), len(test_cam_infos))
     nerf_normalization = getNerfppNorm(train_cam_infos)
 
     ply_path = os.path.join(path, "sparse/0/points3D.ply")
@@ -199,6 +224,7 @@ def readColmapSceneInfo(path, images, eval, test_set, indices_path, llffhold=8):
                            ply_path=ply_path)
     return scene_info
 
+"""
 def readCamerasFromTransforms(path, transformsfile, white_background, extension=".png"):
     cam_infos = []
 
@@ -241,16 +267,75 @@ def readCamerasFromTransforms(path, transformsfile, white_background, extension=
             
     return cam_infos
 
+"""
+
+def mfocal2fov(focal_length, size):
+    return 2 * math.atan(size / (2 * focal_length))
+
+def mfov2focal(fov, size):
+    return size / (2 * math.tan(fov / 2))
+
+def readCamerasFromTransforms(path, transformsfile, white_background, extension=".png"):
+    cam_infos = []
+
+    with open(os.path.join(path, transformsfile)) as json_file:
+        contents = json.load(json_file)
+        
+        frames = contents["frames"]
+        for idx, frame in enumerate(frames):
+            cam_name = os.path.join(path, frame["file_path"])
+
+            # NeRF 'transform_matrix' is a camera-to-world transform
+            c2w = np.array(frame["transform_matrix"])
+            # change from OpenGL/Blender camera axes (Y up, Z back) to COLMAP (Y down, Z forward)
+            c2w[:3, 1:3] *= -1
+
+            # get the world-to-camera transform and set R, T
+            w2c = np.linalg.inv(c2w)
+            R = np.transpose(w2c[:3, :3])  # R is stored transposed due to 'glm' in CUDA code
+            T = w2c[:3, 3]
+
+            image_path = os.path.join(path, cam_name)
+            image_name = Path(cam_name).stem
+            image = Image.open(image_path)
+
+            im_data = np.array(image.convert("RGBA"))
+
+            bg = np.array([1, 1, 1]) if white_background else np.array([0, 0, 0])
+
+            norm_data = im_data / 255.0
+            arr = norm_data[:, :, :3] * norm_data[:, :, 3:4] + bg * (1 - norm_data[:, :, 3:4])
+            image = Image.fromarray(np.array(arr * 255.0, dtype=np.uint8), "RGB")
+
+            # Calculate camera_angle_x using focal length and image width
+            fl_x = frame["fl_x"]
+            width = frame["w"]
+            camera_angle_x = 2 * math.atan(width / (2 * fl_x))
+
+            fovy = mfocal2fov(mfov2focal(camera_angle_x, image.size[0]), image.size[1])
+            FovY = fovy 
+            FovX = camera_angle_x
+
+            # Create a placeholder for language_feature_indices if not available
+            language_feature_indices = np.array([])  # Adjust as needed
+
+            cam_infos.append(CameraInfo(uid=idx, R=R, T=T, FovY=FovY, FovX=FovX, image=image,
+                                        image_path=image_path, image_name=image_name, width=image.size[0],
+                                        height=image.size[1], language_feature_indices=language_feature_indices))
+
+    return cam_infos
+
 def readNerfSyntheticInfo(path, white_background, eval, test_set, indices_path, extension=".png"):
     print("Reading Training Transforms")
     train_cam_infos = readCamerasFromTransforms(path, "transforms_train.json", white_background, extension)
-    print("Reading Test Transforms")
-    test_cam_infos = readCamerasFromTransforms(path, "transforms_test.json", white_background, extension)
+    # print("Reading Test Transforms")
+    # test_cam_infos = readCamerasFromTransforms(path, "transforms_test.json", white_background, extension)
     
-    if not eval:
-        train_cam_infos.extend(test_cam_infos)
-        test_cam_infos = []
-
+    # if not eval:
+    #     train_cam_infos.extend(test_cam_infos)
+    #     test_cam_infos = []
+    print("Skip Test Transforms")
+    test_cam_infos = []
     nerf_normalization = getNerfppNorm(train_cam_infos)
 
     ply_path = os.path.join(path, "points3d.ply")

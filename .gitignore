@@ -1,13 +1,47 @@
-*.pyc
-*/__pycache__
-.vscode
-pyproject.toml
+# Data directories
+data/
+output/
+mean_metric/
+Render/
 
-build
-diff_rasterization/diff_rast.egg-info
-diff_rasterization/dist
+# Model outputs and checkpoints
+*.pth
+*.ckpt
+*.pt
+*.bin
 
-data
-output
-*/runs/
-*/runs_archive/
+# Results and intermediate files
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.xlsx
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE settings
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Specific directories to exclude
+mean_metric/
+Neg/
+Qwen/*/
+unsloth/
+expert/*/

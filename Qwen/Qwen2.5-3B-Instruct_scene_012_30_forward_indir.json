@@ -1,0 +1,60 @@
+{
+    "text": [
+        "Traffic Cones",
+        "Barriers",
+        "Temporary Lane Markings"
+    ],
+    "helping_positives": [
+        [
+            "orange cones",
+            "warning signs",
+            "dividers"
+        ],
+        [
+            "plastic dividers",
+            "barricades",
+            "safety barriers"
+        ],
+        [
+            "dashed lines",
+            "arrows",
+            "stripes",
+            "delineators"
+        ]
+    ],
+    "negatives": [
+        [
+            "parked cars",
+            "parked trucks",
+            "other vehicles",
+            "pedestrians",
+            "cyclists",
+            "stationary bikes"
+        ],
+        [
+            "wooden planks",
+            "garden furniture",
+            "trash cans",
+            "mailboxes",
+            "plant pots",
+            "benches"
+        ],
+        [
+            "solid white lines",
+            "yellow lines",
+            "double yellow lines",
+            "pedestrian crossings",
+            "crosswalks",
+            "bike lanes"
+        ]
+    ],
+    "segformer_class_id": [
+        11,
+        14,
+        7,
+        -1,
+        8,
+        2,
+        0
+    ]
+}

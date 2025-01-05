@@ -12,7 +12,7 @@ from dino.dino_utils import get_image_paths
 class DinoExtractorParams():
     model_type: str = 'dino_vits8'
     device: str = 'cuda'
-    stride: int = 2
+    stride: int = 4
     load_size: int = 224
     layer: int = 11
     facet: str = 'key'

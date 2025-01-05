@@ -1,0 +1,40 @@
+{
+    "text": [
+        "Pedestrian",
+        "Vehicle",
+        "traffic signs",
+        "Sidewalk",
+        "Trees",
+        "Buildings",
+        "Road"
+    ],
+    "helping_positives": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+    ],
+    "negatives": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+
+    ],
+    "segformer_class_id": [
+        11, 
+        13, 
+        7,  
+        1, 
+        8,  
+        2,  
+        0   
+    ]
+}
+

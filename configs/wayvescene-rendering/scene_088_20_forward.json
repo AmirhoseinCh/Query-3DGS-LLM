@@ -1,0 +1,90 @@
+{
+    "text": [
+        "Stop sign",
+        "Road",
+        "Cars",
+        "Zebra Crossing",
+        "Sidewalk",
+        "Building",
+        "Traffic Light"
+    ],
+    "helping_positives": [
+        [
+            "Traffic signs",
+            "Regulatory signs",
+            "Warning signs"
+        ],
+        [
+            "Asphalt",
+            "Driveway",
+            "Ground",
+            "Crosswalk"
+        ],
+        [
+            "Vehicle",
+            "Automobile",
+            "Road"
+        ],
+        [
+            "Pedestrian Crossing",
+            "Crosswlak"
+        ],
+        [
+            "Pavement",
+            "Walkway"
+        ],
+        [
+            "Structre",
+            "Edifice",
+            "Architecture"
+        ],
+        [
+            "Traffic Signal",
+            "Stoplight",
+            "Semaphore",
+            "Red light"
+        ]
+    ],
+    "negatives": [
+        [
+            "Billboard",
+            "Traffic light",
+            "Pedestrian",
+            "Tree",
+            "Building"
+        ],
+        [
+            "Grass",
+            "Sidewalk",
+            "Tree",
+            "Sky",
+            "Cars"
+        ],
+        [
+            "Buildings",
+            "Pedestrian",
+            "Tree"
+        ],
+        [
+            "Asphalt",
+            "Driveway",
+            "Car",
+            "Tree"
+        ],
+        [
+            "Road", 
+            "Grass",
+            "Crosswalk"
+        ],
+        [
+            "Car",
+            "Pedestrian",
+            "Sky",
+            "Tree",
+            "Road"
+        ],
+        [
+            "Tree", "Building", "Pedestrian", "Sky"
+        ]
+    ]
+}

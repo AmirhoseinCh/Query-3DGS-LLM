@@ -60,9 +60,12 @@ class Trainer:
         return dataset_cls(self.args.image_dir)
 
     def train(self):
+        print('data loading with: ', self.args.batch_size)
         data_loader = DataLoader(self.select_dataset(), batch_size=self.args.batch_size, shuffle=self.args.shuffle)
+        print('data loaded')
         color_map = generate_colors(self.args.n_e)
         model, optimizer, scheduler = self.setup_training()
+        print('model set up for training')
 
         model.train()
         for epoch in tqdm(range(self.args.epoch), dynamic_ncols=True):
@@ -93,6 +96,7 @@ class Trainer:
 
             self.write_tensorboard(metric_loss, loss, loss_cos, loss_kl, load_balancing_loss, d, loss_d, perplexity)
             if self.tensorboard_step % self.args.interv_n == 0:
+                print('save model')
                 self.save_model(model, encoding_indices_tensor, color_map)
             self.tensorboard_step += 1
                 
@@ -149,5 +153,6 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
+    print('Args recieved')
     trainer = Trainer(args)
     trainer.train()

@@ -1,0 +1,64 @@
+{
+    "text": [
+        "Street",
+        "Traffic Light",
+        "Office Building",
+        "Sidewalk"
+    ],
+    "helping_positives": [
+        [
+            "Clear day",
+            "traffic lights",
+            "modern office buildings",
+            "sidewalk"
+        ],
+        [
+            "Clear day",
+            "traffic flow"
+        ],
+        [
+            "Glass facades",
+            "modern design",
+            "office space"
+        ],
+        [
+            "Fall colors",
+            "pedestrian presence",
+            "greenery"
+        ]
+    ],
+    "negatives": [
+        [
+            "Pedestrian",
+            "trees",
+            "traffic cones",
+            "traffic signs"
+        ],
+        [
+            "Red",
+            "yellow",
+            "green",
+            "stop sign",
+            "speed limit sign"
+        ],
+        [
+            "Non-functional building",
+            "parking lot",
+            "busy streets"
+        ],
+        [
+            "Trees",
+            "parked cars",
+            "pedestrians crossing",
+            "non-traffic-related objects"
+        ]
+    ],
+    "segformer_class_id": [
+        6,
+        13,
+        1,
+        2,
+        8,
+        0
+    ]
+}

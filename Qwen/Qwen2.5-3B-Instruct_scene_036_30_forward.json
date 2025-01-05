@@ -1,0 +1,85 @@
+{
+    "text": [
+        "traffic signs",
+        "cars",
+        "buildings",
+        "tree",
+        "road"
+    ],
+    "helping_positives": [
+        [
+            "sign",
+            "traffic control",
+            "road markings"
+        ],
+        [
+            "vehicle",
+            "automobile",
+            "parked"
+        ],
+        [
+            "residential",
+            "commercial",
+            "structures"
+        ],
+        [
+            "foliage",
+            "trunk",
+            "branches"
+        ],
+        [
+            "pavement",
+            "asphalt",
+            "surface"
+        ]
+    ],
+    "negatives": [
+        [
+            "trees",
+            "buildings",
+            "vehicles",
+            "pedestrians",
+            "animals",
+            "sky"
+        ],
+        [
+            "trucks",
+            "motorcycles",
+            "bicycles",
+            "pedestrians",
+            "animals",
+            "buildings"
+        ],
+        [
+            "cars",
+            "pedestrians",
+            "animals",
+            "trees",
+            "sky",
+            "water"
+        ],
+        [
+            "vehicle",
+            "building",
+            "person",
+            "animal",
+            "cloud",
+            "sky"
+        ],
+        [
+            "sidewalk",
+            "parking lot",
+            "pedestrian walkway",
+            "railroad track",
+            "body of water",
+            "vegetation not part of road surface"
+        ]
+    ],
+    "segformer_class_id": [
+        7,
+        13,
+        2,
+        8,
+        0
+    ]
+}

@@ -1,0 +1,58 @@
+{
+    "text": [
+        "Traffic Light",
+        "Vehicles",
+        "Pedestrians"
+    ],
+    "helping_positives": [
+        [
+            "red",
+            "yellow",
+            "green"
+        ],
+        [
+            "car",
+            "truck",
+            "sedan"
+        ],
+        [
+            "walking",
+            "crosswalk",
+            "person"
+        ]
+    ],
+    "negatives": [
+        [
+            "pedestrian",
+            "building",
+            "vehicle",
+            "tree",
+            "sign",
+            "pole"
+        ],
+        [
+            "traffic light",
+            "pedestrian",
+            "building",
+            "tree",
+            "sign",
+            "pole"
+        ],
+        [
+            "vehicle",
+            "traffic light",
+            "building",
+            "tree",
+            "sign",
+            "pole"
+        ]
+    ],
+    "segformer_class_id": [
+        6,
+        13,
+        1,
+        2,
+        8,
+        0
+    ]
+}

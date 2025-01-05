@@ -1,0 +1,85 @@
+{
+    "text": [
+        "cars",
+        "pedestrians",
+        "sidewalk",
+        "road",
+        "buildings"
+    ],
+    "helping_positives": [
+        [
+            "parked",
+            "modern",
+            "historic"
+        ],
+        [
+            "walking",
+            "crossing street",
+            "wearing coats"
+        ],
+        [
+            "curb",
+            "pavement",
+            "pedestrian"
+        ],
+        [
+            "pavement",
+            "curb",
+            "lane markings"
+        ],
+        [
+            "brick",
+            "high-rise",
+            "modern"
+        ]
+    ],
+    "negatives": [
+        [
+            "brick",
+            "buildings",
+            "apartments",
+            "pedestrians",
+            "bicycles",
+            "signs"
+        ],
+        [
+            "parked cars",
+            "shop signs",
+            "construction barriers",
+            "bicycles",
+            "mailboxes",
+            "streetlights"
+        ],
+        [
+            "road",
+            "building",
+            "vehicle",
+            "park",
+            "fence",
+            "sign"
+        ],
+        [
+            "building",
+            "vehicle",
+            "pedestrian",
+            "sign",
+            "tree",
+            "sky"
+        ],
+        [
+            "vehicles",
+            "businesses",
+            "curves",
+            "overcast",
+            "parked",
+            "apartments"
+        ]
+    ],
+    "segformer_class_id": [
+        13,
+        11,
+        1,
+        0,
+        2
+    ]
+}

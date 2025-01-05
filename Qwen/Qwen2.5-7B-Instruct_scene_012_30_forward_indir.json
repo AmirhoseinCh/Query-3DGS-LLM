@@ -1,0 +1,59 @@
+{
+    "text": [
+        "Traffic Cones",
+        "Barriers",
+        "Lane Markings"
+    ],
+    "helping_positives": [
+        [
+            "construction",
+            "warning",
+            "roadwork"
+        ],
+        [
+            "safety",
+            "protection",
+            "roadwork"
+        ],
+        [
+            "temporary",
+            "construction",
+            "roadwork"
+        ]
+    ],
+    "negatives": [
+        [
+            "cars",
+            "trees",
+            "buildings",
+            "pedestrians",
+            "barriers",
+            "lane markers"
+        ],
+        [
+            "traffic cones",
+            "trees",
+            "buildings",
+            "pedestrians",
+            "lane markers",
+            "caution signs"
+        ],
+        [
+            "permanent lines",
+            "trees",
+            "buildings",
+            "pedestrians",
+            "traffic cones",
+            "barriers"
+        ]
+    ],
+    "segformer_class_id": [
+        11,
+        14,
+        7,
+        -1,
+        8,
+        2,
+        0
+    ]
+}

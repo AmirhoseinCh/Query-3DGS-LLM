@@ -1,0 +1,31 @@
+{
+    "text": [
+        "traffic signs",
+        "cars",
+        "buildings",
+        "tree",
+        "road"
+    ],
+    "helping_positives": [
+        [],
+        [],
+        [],
+        [],
+        []
+    ],
+    "negatives": [
+        [],
+        [],
+        [],
+        [],
+        []
+    ],
+    "segformer_class_id": [
+        7,  
+        13, 
+        2,  
+        8,  
+        0   
+    ]
+}
+

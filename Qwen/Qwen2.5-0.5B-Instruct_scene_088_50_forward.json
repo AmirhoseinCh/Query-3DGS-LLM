@@ -1,0 +1,99 @@
+{
+    "text": [
+        "sidewalk",
+        "crosswalk",
+        "cars",
+        "building",
+        "road",
+        "tree",
+        "stop sign"
+    ],
+    "helping_positives": [
+        [
+            "clean",
+            "well-maintained",
+            "busy"
+        ],
+        [
+            "pedestrian crossing",
+            "traffic light",
+            "traffic signal"
+        ],
+        [
+            "car"
+        ],
+        [
+            "house",
+            "apartment",
+            "residence"
+        ],
+        [
+            "clear",
+            "stop signs",
+            "road markings"
+        ],
+        [
+            "vibrant autumn color"
+        ],
+        [
+            "clear",
+            "yellow",
+            "red"
+        ]
+    ],
+    "negatives": [
+        [
+            "abandoned",
+            "narrow",
+            "uneven",
+            "empty"
+        ],
+        [
+            "bicycle path",
+            "bike lane",
+            "parking lot",
+            "driveway",
+            "utility pole",
+            "fence",
+            "median strip"
+        ],
+        [
+            "truck",
+            "bus",
+            "motorcycle",
+            "van"
+        ],
+        [
+            "parking lot",
+            "garage",
+            "fence",
+            "playground",
+            "bridge"
+        ],
+        [
+            "traffic",
+            "vehicles",
+            "pedestrians",
+            "buildings"
+        ],
+        [
+            "dead tree",
+            "tall tree",
+            "small tree"
+        ],
+        [
+            "traffic light",
+            "pedestrian crosswalk",
+            "traffic cone"
+        ]
+    ],
+    "segformer_class_id": [
+        1,
+        -1,
+        13,
+        2,
+        0,
+        8,
+        7
+    ]
+}

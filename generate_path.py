@@ -85,10 +85,10 @@ def interpolate_camera_path(positions, rotations, steps):
 
 # interpolated_positions_example, interpolated_rotations_example = interpolate_camera_path(positions_example, rotations_example, steps_example)
 # interpolated_positions_example, interpolated_rotations_example  # Display the results
-
+"""
 def generate_path(viewpoint_stack):
     viewpoint_stack = sorted(viewpoint_stack, key=lambda x: x.image_name)
-
+    
     Ts = []
     Rs = []
     for v in viewpoint_stack:
@@ -106,9 +106,37 @@ def generate_path(viewpoint_stack):
                   image_name=f"{cam0.image_name}_{i:04}", uid=cam0.uid, data_device="cuda"))
         
     return path
+"""
+def generate_path(viewpoint_stack, test_set):
+    # Assuming viewpoint_stack is a list of camera viewpoint pairs
+    all_paths = []
+    
+    for pair_index in range(int(len(test_set)/2)):
+        j = int(2 * pair_index)
+        print('j:',j)
+        cam1 = next((cam for cam in viewpoint_stack if cam.image_name == test_set[j]), None)
+        cam2 = next((cam for cam in viewpoint_stack if cam.image_name == test_set[j + 1]), None)
+        
+        # Extract translation and rotation from both cameras in the pair
+        Ts = [cam1.T.tolist(), cam2.T.tolist()]
+        Rs = [cam1.R.tolist(), cam2.R.tolist()]
+
+        # Generate interpolated positions and rotations between the two viewpoints
+        interpolated_positions, interpolated_rotations = interpolate_camera_path(Ts, Rs, 240)
+        
+        path = []
+        for i in range(len(interpolated_positions)):
+            path.append(Camera(colmap_id=cam1.colmap_id, R=interpolated_rotations[i], T=interpolated_positions[i], 
+                               FoVx=cam1.FoVx, FoVy=cam1.FoVy, 
+                               image=cam1.original_image, gt_alpha_mask=None, language_feature_indices=None,
+                               image_name=f"{cam1.image_name}_{i:04}", uid=cam1.uid, data_device="cuda"))
+        all_paths.extend(path)
+        
+    return all_paths
+
     
 
-def rendering_mask(dataset, opt, pipe, checkpoint, codebook_pth, test_set, texts_dict, a, scale, com_type, device="cuda"):
+def rendering_mask(dataset, opt, pipe, checkpoint, codebook_pth, test_set, texts_dict, helping_positives, negatives, a, scale, com_type, device="cuda"):
     gaussians = GaussianModel(dataset.sh_degree, dataset.semantic_features_dim, dataset.points_num_limit)
     scene = Scene(dataset, gaussians, test_set=test_set, is_test=True)
     index_decoder = IndexDecoder(dataset.semantic_features_dim, dataset.codebook_size).to(device)
@@ -132,16 +160,18 @@ def rendering_mask(dataset, opt, pipe, checkpoint, codebook_pth, test_set, texts
     background = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
     
     viewpoint_stack = scene.getTestCameras().copy()
-    path = generate_path(viewpoint_stack)
+    print('-test set:',len(test_set))
+    print('-view stack:',len(viewpoint_stack))
+    path = generate_path(viewpoint_stack, test_set)
     for cam in path:
         render_pkg = render(cam, gaussians, pipe, background)
-        
+        name = cam.image_name.replace('/', '-').split('.')[0]
         image = render_pkg["render"].detach()
         
-        torchvision.utils.save_image(image, f"{pred_images_pth}/{cam.image_name}.png")
+        torchvision.utils.save_image(image, f"{pred_images_pth}/{name}.png")
         
-        os.makedirs(f"{rele_pth}/{cam.image_name}/array", exist_ok=True)
-        os.makedirs(f"{rele_pth}/{cam.image_name}/images", exist_ok=True)
+        os.makedirs(f"{rele_pth}/{name}/array", exist_ok=True)
+        os.makedirs(f"{rele_pth}/{name}/images", exist_ok=True)
         
         semantic_features = render_pkg["semantic_features"].detach()
         norm_semantic_features = F.normalize(semantic_features, p=2, dim=0)
@@ -165,12 +195,12 @@ def rendering_mask(dataset, opt, pipe, checkpoint, codebook_pth, test_set, texts
                 rele1 = clip_rele.get_relevancy(clip_features, texts_dict[text][1], scale).squeeze()[..., 0]
                 rele = torch.logical_or((rele0 >= a).float(), (rele1 >= a).float())
             else:
-                rele = clip_rele.get_relevancy(clip_features, texts_dict[text], negatives=None, scale=scale).squeeze()[..., 0]
+                rele = clip_rele.get_relevancy(clip_features, texts_dict[text],  helping_positives= helping_positives, negatives= negatives, scale=scale).squeeze()[..., 0]
             
             msk = (rele >= a)
             
-            np.save(f"{rele_pth}/{cam.image_name}/array/{text}.npy", rele.detach().cpu().numpy())
-            torchvision.utils.save_image(rele, f"{rele_pth}/{cam.image_name}/images/{text}.png")
+            np.save(f"{rele_pth}/{name}/array/{text}.npy", rele.detach().cpu().numpy())
+            torchvision.utils.save_image(rele, f"{rele_pth}/{name}/images/{text}.png")
             
             seg_indices[msk] = i
         
@@ -192,6 +222,8 @@ if __name__ == "__main__":
     parser.add_argument("--codebook", type=str, default = None)
     parser.add_argument("--test_set", nargs="+", type=str, default=[])
     parser.add_argument("--texts", nargs="+", type=str, default=[])
+    parser.add_argument("--helping_positives", nargs="+", type=str, default=None)
+    parser.add_argument("--negatives", nargs="+", type=str, default=None)
     parser.add_argument("--alpha", type=float, default=0.5)
     parser.add_argument("--scale", type=float, default=100)
     parser.add_argument("--com_type", type=str, default="")
@@ -209,6 +241,6 @@ if __name__ == "__main__":
     
     rendering_mask(lp.extract(args), op.extract(args), pp.extract(args), 
             args.start_checkpoint, args.codebook,
-            args.test_set, texts_dict, args.alpha, args.scale, args.com_type)
+            args.test_set, texts_dict, args.helping_positives, args.negatives, args.alpha, args.scale, args.com_type)
 
     print("Rendering complete.")

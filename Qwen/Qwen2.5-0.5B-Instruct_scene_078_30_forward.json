@@ -1,0 +1,79 @@
+{
+    "text": [
+        "cars",
+        "pedestrians",
+        "sidewalk",
+        "road",
+        "buildings"
+    ],
+    "helping_positives": [
+        [
+            "automobile",
+            "vehicle",
+            "motorbike"
+        ],
+        [
+            "pedestrian"
+        ],
+        [
+            "straight",
+            "clean",
+            "level"
+        ],
+        [
+            "straight",
+            "open",
+            "unobstructed"
+        ],
+        [
+            "brick buildings",
+            "tall buildings",
+            "high-rise apartments"
+        ]
+    ],
+    "negatives": [
+        [
+            "bus",
+            "train",
+            "truck",
+            "motorcycle",
+            "golf cart"
+        ],
+        [
+            "vehicle",
+            "car",
+            "truck",
+            "bus"
+        ],
+        [
+            "cluttered",
+            "uneven",
+            "obstructed",
+            "dangerous"
+        ],
+        [
+            "curve",
+            "intersection",
+            "junction",
+            "traffic signs",
+            "parking spaces",
+            "potholes",
+            "debris"
+        ],
+        [
+            "street lamps",
+            "pedestrians",
+            "cars",
+            "trees",
+            "clouds",
+            "fog"
+        ]
+    ],
+    "segformer_class_id": [
+        13,
+        11,
+        1,
+        0,
+        2
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "text": [
+        "Pedestrian"
+    ],
+    "helping_positives": [
+        ["person", "human", "crosswalk"]
+    ],
+    "negatives": [
+        ["traffic light", "road", "traffic cone", "building", "tree"]
+    ],
+    "segformer_class_id": [
+        11
+    ]
+}
+

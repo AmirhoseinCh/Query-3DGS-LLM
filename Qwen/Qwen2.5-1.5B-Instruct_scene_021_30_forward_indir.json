@@ -1,0 +1,55 @@
+{
+    "text": [
+        "Traffic Light",
+        "Office Buildings",
+        "Tree-Lined Sidewalks"
+    ],
+    "helping_positives": [
+        [
+            "signaling system",
+            "countdown timer",
+            "colored lights"
+        ],
+        [
+            "modern design",
+            "glass facade",
+            "tall structure"
+        ],
+        [
+            "autumn foliage",
+            "greenery",
+            "sidewalk"
+        ]
+    ],
+    "negatives": [
+        [
+            "pedestrian crossing",
+            "stop sign",
+            "bicycle",
+            "car",
+            "truck"
+        ],
+        [
+            "house",
+            "garage",
+            "park",
+            "playground",
+            "mountain"
+        ],
+        [
+            "grassy field",
+            "open space",
+            "beach",
+            "desert",
+            "forest"
+        ]
+    ],
+    "segformer_class_id": [
+        6,
+        13,
+        1,
+        2,
+        8,
+        0
+    ]
+}

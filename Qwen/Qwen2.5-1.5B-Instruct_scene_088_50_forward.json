@@ -1,0 +1,109 @@
+{
+    "text": [
+        "sidewalk",
+        "crosswalk",
+        "cars",
+        "building",
+        "road",
+        "tree",
+        "stop sign"
+    ],
+    "helping_positives": [
+        [
+            "pavement",
+            "walkway",
+            "walking surface"
+        ],
+        [
+            "pedestrian crossing",
+            "traffic lane separation",
+            "sidewalk interface"
+        ],
+        [
+            "vehicle",
+            "automobile",
+            "motor vehicle"
+        ],
+        [
+            "structure",
+            "edifice",
+            "construction"
+        ],
+        [
+            "pavement",
+            "traffic lane",
+            "roadway"
+        ],
+        [
+            "leaf",
+            "branch",
+            "trunk"
+        ],
+        [
+            "traffic regulation",
+            "safety indicator",
+            "parking enforcement"
+        ]
+    ],
+    "negatives": [
+        [
+            "dirt path",
+            "driveway",
+            "ramp",
+            "curb",
+            "alley"
+        ],
+        [
+            "pedestrian path",
+            "pedestrian walkway",
+            "road marking",
+            "traffic sign",
+            "car lane"
+        ],
+        [
+            "bicycles",
+            "pedestrians",
+            "animals",
+            "trucks",
+            "motorcycles",
+            "emergency vehicles"
+        ],
+        [
+            "tree",
+            "vehicle",
+            "person",
+            "plant",
+            "rock",
+            "sky"
+        ],
+        [
+            "sidewalk",
+            "driveway",
+            "parking lot",
+            "path"
+        ],
+        [
+            "rock",
+            "building",
+            "person",
+            "car",
+            "bicycle"
+        ],
+        [
+            "traffic light",
+            "pedestrian crossing",
+            "bicycle icon",
+            "yield sign",
+            "caution zone marker"
+        ]
+    ],
+    "segformer_class_id": [
+        1,
+        -1,
+        13,
+        2,
+        0,
+        8,
+        7
+    ]
+}

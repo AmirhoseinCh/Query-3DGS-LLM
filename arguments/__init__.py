@@ -44,7 +44,7 @@ class ModelParams(ParamGroup):
         self.data_device = "cuda"
         self.eval = True
         # to limit the number of points in the model
-        self.points_num_limit = 2_500_000
+        self.points_num_limit = 2_000_000
         # language embedded dimension
         self.semantic_features_dim = 8
         self.codebook_size = 128

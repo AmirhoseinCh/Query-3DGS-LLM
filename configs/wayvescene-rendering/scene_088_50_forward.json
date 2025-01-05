@@ -1,0 +1,38 @@
+{
+    "text": [
+        "sidewalk",
+        "crosswalk",
+        "cars",
+        "building",
+        "road",
+        "tree",
+        "stop sign"
+    ],
+    "helping_positives": [
+        ["concrete pathway", "pedestrian walkway"],
+        ["crossing yellow line"],
+        ["vehicle", "automobile", "road"],
+        ["town house", "house", "residential building"],
+        ["asphalt", "driveway", "ground", "crosswalk", "street"],
+        ["leaves"],
+        [ "traffic signs", "regulatory signs", "warning signs"]
+    ],
+    "negatives": [
+        ["crosswalk", "grass field", "building", "parked cars", "pedestrians", "trees"],
+        ["road", "sidewalk", "pedestrian", "cars", "building"],
+        ["buildings", "pedestrian", "tree", "crosswalk"],
+        ["car", "pedestrian", "sky", "tree", "road"],
+        ["car", "pedestrian", "sky", "tree", "sidewalk"],
+        ["bush", "fence", "sky", "grass", "car", "building"],
+        ["car", "pedestrian", "sky", "tree", "road"]
+    ],
+    "segformer_class_id": [
+        1,
+        -1, 
+        13, 
+        2,  
+        0,  
+        8,
+        7   
+    ]
+}

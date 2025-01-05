@@ -1,0 +1,85 @@
+{
+    "text": [
+        "traffic light",
+        "cars",
+        "sidewalk",
+        "buildings",
+        "tree",
+        "road"
+    ],
+    "helping_positives": [
+        [
+            "green",
+            "yellow",
+            "red"
+        ],
+        [
+            "car"
+        ],
+        [
+            "tree-lined",
+            "pedestrian"
+        ],
+        [
+            "glass facades",
+            "office buildings"
+        ],
+        [
+            "modern office buildings",
+            "glass facades",
+            "tree-lined sidewalks"
+        ],
+        [
+            "straight",
+            "open",
+            "wide"
+        ]
+    ],
+    "negatives": [
+        [
+            "stop sign",
+            "crosswalk",
+            "pedestrian crossing",
+            "building structure"
+        ],
+        [
+            "truck",
+            "bus",
+            "van",
+            "motorcycle",
+            "bicycle"
+        ],
+        [
+            "car",
+            "motorcycle",
+            "bus",
+            "truck"
+        ],
+        [
+            "skyscrapers",
+            "tall structures",
+            "high-rise buildings"
+        ],
+        [
+            "parked car",
+            "cyclist",
+            "pedestrian",
+            "traffic lights"
+        ],
+        [
+            "curve",
+            "winding",
+            "narrow",
+            "sharp",
+            "hidden"
+        ]
+    ],
+    "segformer_class_id": [
+        6,
+        13,
+        1,
+        2,
+        8,
+        0
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "text": [
+        "Pedestrian",
+        "Vehicle",
+        "traffic signs",
+        "Sidewalk",
+        "Trees",
+        "Buildings",
+        "Road"
+    ],
+    "helping_positives": [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+    ],
+    "negatives": [
+        ["traffic light", "road", "traffic cone", "building", "tree"],
+        ["Pedestrian", "Bicycle", "Traffic Cone", "Traffic Light", "Building", "Tree"],
+        ["Construction cones", "Traffic cones", "Pedestrians", "Vehicles", "Traffic lights", "Buildings"],
+        ["Road", "fences", "asphalt", "Vehicles", "Traffic signs", "Crosswalk"],
+        ["Buildings", "Streetlights", "Construction cones", "Traffic signs", "Cars"],
+        ["Trees", "Traffic lights", "Road signs", "Construction barriers", "clouds", "Sidewalks"],
+        ["Sidewalk", "Traffic cones", "Construction barriers", "sky", "truck", "Buildings"]
+    ],
+    "segformer_class_id": [
+        11, 
+        13, 
+        7,  
+        1, 
+        8,  
+        2,  
+        0   
+    ]
+}
+
