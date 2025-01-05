@@ -10,7 +10,7 @@
     <sup>1</sup>Drexel University, Philadelphia PA 19104, USA&emsp;
 </div>
 <div>
-    <a href='https://arxiv.org/abs/2408.03516'>Paper)</a> | <b>Accepted at the LLVM-AD Workshop at WACV 2025</b>
+    <a href='https://arxiv.org/abs/2408.03516'>Paper</a> | <b>Accepted at the LLVM-AD Workshop at WACV 2025</b>
 </div>
 
 <div>
