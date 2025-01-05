@@ -28,7 +28,7 @@
 <br>
 
 <tr>
-    <img src="./assets/teaser.png" width="100%"/>
+    <img src="./LE3DGS-GPT2.pdf" width="100%"/>
 </tr>
 
 </div>
