@@ -10,12 +10,12 @@
     <sup>1</sup>Drexel University, Philadelphia PA 19104, USA&emsp;
 </div>
 <div>
-    <a href='https://arxiv.org/abs/2408.03516'>Paper (Coming Soon)</a>
+    <a href='https://arxiv.org/abs/2408.03516'>Paper</a>
 </div>
 
 <div>
 <a target="_blank" href="https://arxiv.org/abs/2408.03516">
-  <img src="https://img.shields.io/badge/arXiv-your--paper--id-b31b1b.svg" alt="arXiv Paper"/>
+  <img src="https://img.shields.io/badge/arXiv-2408.03516-b31b1b.svg" alt="arXiv Paper"/>
 </a>
 <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fyour-username%2FQuery3D&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
 </div>
