@@ -25,6 +25,7 @@ data/
 ├── wayvescene/
 │   ├── scene_xxx/
 │   │   ├── images/
+│   │   ├── sparse/
 │   │   ├── xxx_encoding_indices.pt
 │   │   └── xxx_codebook.pt
 
