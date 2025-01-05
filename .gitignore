@@ -4,6 +4,9 @@ output/
 mean_metric/
 Render/
 
+# Submodules
+submodules/
+
 # Model outputs and checkpoints
 *.pth
 *.ckpt
@@ -43,5 +46,5 @@ ENV/
 mean_metric/
 Neg/
 Qwen/*/
-unsloth/
+unsloth/*/
 expert/*/
