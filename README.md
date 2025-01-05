@@ -16,57 +16,133 @@ Our project enables semantic querying and manipulation of 3D Gaussian Splatting 
 
 ## Installation
 
+This project uses two Docker environments: one for the main Gaussian Splatting framework and another for LLM finetuning.
+
+### Main Environment Setup
+
+1. Clone the repository:
 ```bash
-# Clone the repository
 git clone https://github.com/AmirhoseinCh/Query-3DGS-LLM.git
 cd Query-3DGS-LLM
-
-# Install dependencies
-pip install -r requirements.txt
 ```
 
-## Project Structure
-
-```
-.
-├── arguments/          # Command line argument definitions
-├── base/              # Base classes and core functionality
-├── configs/           # Configuration files for different datasets
-├── gaussian_renderer/ # Gaussian splatting renderer
-├── preprocess/        # Data preprocessing utilities
-├── scene/            # Scene representation and management
-├── utils/            # Utility functions and helpers
-└── requirements.txt   # Project dependencies
-```
-
-## Usage
-
-### Training
-
+2. Build the main Docker image:
 ```bash
-# Run training script
+docker build -t legaussians .
+```
+
+3. Run the container:
+```bash
 ./run.sh
 ```
 
-### Evaluation
+The `run.sh` script will set up the Docker environment and start the container with all necessary dependencies installed.
 
+### LLM Finetuning Environment
+
+For LLM finetuning, we use [unsloth](https://github.com/unslothai/unsloth), which requires a separate environment:
+
+1. Navigate to the unsloth directory:
 ```bash
-# Run evaluation
-python eval.py --config configs/your_config.yaml
+cd unsloth
 ```
 
-### Scene Rendering
-
+2. Build the unsloth Docker image:
 ```bash
-# Render scenes
-./render_scenes.sh
+docker build -t unsloth .
 ```
 
-## Models
+3. Run the unsloth container:
+```bash
+./run_unsloth.sh
+```
+
+This will set up the environment specifically for finetuning LLMs (Qwen and Llama models).
+
+Note: Make sure you have Docker installed on your system before proceeding with either installation.
+
+## Pipeline
+
+### 1. Preprocessing
+
+We extract and process features from multi-view images following these steps:
+
+1. Extract dense CLIP and DINO features from multi-view images
+2. Concatenate them as dense features
+3. Quantize the features and save:
+   - Feature indices (`xxx_encoding_indices.pt`)
+   - Codebook (`xxx_codebook.pt`)
+
+To preprocess the images:
+```bash
+cd preprocess
+python quantize_features.py --config configs/mipnerf360/xxx.cfg
+```
+
+Configuration files for specific scenes can be found in `./preprocess/configs/mipnerf360`. You can modify these configs for other scenes or datasets.
+
+### 2. Training
+
+Train the model using the `train.py` script. Config files specify:
+- Data and output paths
+- Training hyperparameters
+- Test set
+- Language feature indices path
+
+```bash
+python train.py --config configs/mipnerf360/xxx.cfg
+```
+
+Training configs for the Mip-NeRF 360 dataset are located in `./configs/mipnerf360`.
+
+### 3. Rendering
+
+Use `render_mask.py` to generate:
+- RGB images
+- Relevancy maps of text queries
+- Segmentation masks
+
+```bash
+python render_mask.py --config configs/mipnerf360-rendering/xxx.cfg
+```
+
+Rendering configs are located in `./configs/mipnerf360-rendering`. The config files specify:
+- Paths
+- Queried texts
+- Test set
+- Rendering parameters
+
+Note: Model loading can be slow. You can modify `train.py` to render the scene immediately after training.
+
+## Models and Finetuning
 
 We support multiple LLM models:
 - Qwen 2.5 series (0.5B, 1.5B, 3B, 7B)
-- Llama series
+- Llama series (1B, 3B, 8B)
+
+### Model Finetuning
+
+The project uses [unsloth](https://github.com/unslothai/unsloth) for efficient LLM finetuning. The finetuning process is accelerated using unsloth's optimization techniques:
+
+1. Start the unsloth Docker container:
+```bash
+cd unsloth
+./run_unsloth.sh
+```
+
+2. Run the finetuning process:
+- For Qwen models, use the notebooks in the unsloth directory:
+  - `finetune.ipynb`: General finetuning notebook
+  - `Qwen_2_5_+_Unsloth_2x_faster_finetuning.ipynb`: Optimized Qwen 2.5 finetuning
+
+The finetuned models are saved in the respective output directories:
+- `outputs-0.5B/`: Qwen 2.5 0.5B model outputs
+- `outputs-1.5B/`: Qwen 2.5 1.5B model outputs
+- `outputs-3B/`: Qwen 2.5 3B model outputs
+- `outputs-7B/`: Qwen 2.5 7B model outputs
+- `outputs-Llama-1B-Instruct/`: Llama 1B model outputs
+- `outputs-Llama-3B-Instruct/`: Llama 3B model outputs
+- `outputs-Llama-8B-Instruct/`: Llama 8B model outputs
 
 ## Results
 
@@ -96,7 +172,7 @@ If you use this code in your research, please cite our work:
 
 ## Acknowledgments
 
-This work builds upon the [LEGaussian](https://github.com/buaavrcg/LEGaussians) implementation. We thank the original authors for making their code available.
+This work builds upon the [LEGaussian](link-to-original-repo) implementation. We thank the original authors for making their code available.
 
 ## License
 
