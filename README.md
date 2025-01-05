@@ -6,13 +6,31 @@ This repository contains code for LLM-powered semantic querying of 3D Gaussian S
 
 Our project enables semantic querying and manipulation of 3D Gaussian Splatting scenes using natural language through LLM integration. Users can query scene elements, modify representations, and generate targeted visualizations through natural language interactions.
 
-## Features
+## Datasets
 
-- Integration with multiple LLM models (Qwen 2.5 and Llama series)
-- Semantic scene understanding and querying
-- Natural language based scene manipulation
-- Support for multiple 3D scene datasets (mipnerf360, wayvescene)
-- Evaluation metrics and visualization tools
+### WayveScenes Dataset
+The main dataset used in this project is WayveScenes 101, which can be downloaded from the [official repository](https://github.com/wayveai/wayve_scenes).
+
+### Pre-processed Data
+For convenience, we provide pre-processed data used in our paper:
+- Subset of scenes used in experiments
+- Pre-extracted language features
+- Pre-computed codebooks
+
+Download link: [Google Drive Link]
+
+After downloading, place the data in the following structure:
+```
+data/
+├── wayvescene/
+│   ├── scene_xxx/
+│   │   ├── images/
+│   │   ├── xxx_encoding_indices.pt
+│   │   └── xxx_codebook.pt
+
+```
+
+Note: Please cite the original [WayveScenes paper](https://github.com/wayveai/wayve_scenes) if you use their dataset in your research.
 
 ## Installation
 
@@ -76,10 +94,10 @@ We extract and process features from multi-view images following these steps:
 To preprocess the images:
 ```bash
 cd preprocess
-python quantize_features.py --config configs/mipnerf360/xxx.cfg
+python quantize_features.py --config configs/wayvescene/xxx.cfg
 ```
 
-Configuration files for specific scenes can be found in `./preprocess/configs/mipnerf360`. You can modify these configs for other scenes or datasets.
+Configuration files for specific scenes can be found in `./preprocess/configs/wayvescene`. You can modify these configs for other scenes or datasets.
 
 ### 2. Training
 
@@ -90,29 +108,34 @@ Train the model using the `train.py` script. Config files specify:
 - Language feature indices path
 
 ```bash
-python train.py --config configs/mipnerf360/xxx.cfg
+python train.py --config configs/wayvescene/xxx.cfg
 ```
 
-Training configs for the Mip-NeRF 360 dataset are located in `./configs/mipnerf360`.
+Training configs for the WayveScenes 101 dataset are located in `./configs/wayvescene`.
 
 ### 3. Rendering
 
-Use `render_mask.py` to generate:
+You can render scenes using the batch rendering script for multiple scenes:
+```bash
+./render_scenes.sh
+```
+
+The rendering process generates:
 - RGB images
 - Relevancy maps of text queries
 - Segmentation masks
 
+### 4. Evaluation
+
+Run evaluation on the rendered results using:
 ```bash
-python render_mask.py --config configs/mipnerf360-rendering/xxx.cfg
+./eval_scenes.sh
 ```
 
-Rendering configs are located in `./configs/mipnerf360-rendering`. The config files specify:
-- Paths
-- Queried texts
-- Test set
-- Rendering parameters
-
-Note: Model loading can be slow. You can modify `train.py` to render the scene immediately after training.
+This script will evaluate the model's performance across all specified scenes and generate metrics including:
+- Mean accuracy
+- Mean IoU
+- Mean precision
 
 ## Models and Finetuning
 
@@ -139,14 +162,6 @@ The notebook contains all necessary steps and instructions for finetuning both Q
 
 Finetuned models will be saved in the respective output directories based on the model size and type (e.g., `outputs-3B/` for Qwen 2.5 3B model).
 
-## Results
-
-Our evaluation metrics include:
-- Mean accuracy comparison
-- Mean IoU comparison
-- Mean precision comparison
-
-Detailed results and visualizations can be found in your paper/documentation.
 
 ## Contributing
 
@@ -167,7 +182,7 @@ If you use this code in your research, please cite our work:
 
 ## Acknowledgments
 
-This work builds upon the [LEGaussian](link-to-original-repo) implementation. We thank the original authors for making their code available.
+This work builds upon the [LEGaussian](https://github.com/buaavrcg/LEGaussians) implementation. We thank the original authors for making their code available.
 
 ## License
 
