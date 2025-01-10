@@ -50,7 +50,7 @@ For convenience, we provide pre-processed data used in our paper:
 - Pre-extracted language features
 - Pre-computed codebooks
 
-Download link: [Google Drive Link]
+Download link: [Google Drive Link](https://drive.google.com/drive/folders/1f7w9N5sYX2ltoEYYw7SGX2i8_4VwIyhP?usp=sharing)
 
 After downloading, place the data in the following structure:
 ```
